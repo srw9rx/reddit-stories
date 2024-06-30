@@ -40,6 +40,7 @@
     {"term": "NSFL", "replacement": "Not Safe For Life"},
     {"term": "NSFW", "replacement": "Not Safe For Work"},
     {"term": "NTA", "replacement": "Not The Asshole"},
+    {"term": "NYTO", "replacement": "No, you're thinking of"},
     {"term": "OC", "replacement": "Original Content"},
     {"term": "OP", "replacement": "Original Poster "},
     {"term": "OTP", "replacement": "One True Pairing"},
