@@ -1,5 +1,17 @@
 from gtts import gTTS
 import datetime
+import json
+from typing import Union
+
+def replace_words(text:str, vocab_path:str) -> str:
+    '''
+    :param text:str: the text that we are cleaning
+    :param vocab_path: the path to a json document of vocab being replaced
+    :return: the string with the listed vocabulary words replaced'''
+    assert(vocab_path[-4:]=='json')
+    mappings = json.loads(vocab_path) # read in the json document
+    return text
+    
 
 def text_to_speech(text:str, path:str):
     '''
