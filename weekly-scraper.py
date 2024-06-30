@@ -2,11 +2,8 @@ import praw
 import datetime as dt
 import csv
 import os
-
-# Define your credentials
-CLIENT_ID = 'vstM2xdDcE-R5ZCJfRQiAw'
-CLIENT_SECRET = 'g7H871S_IAzRZpjBVQjYydbVSR1J4A'
-USER_AGENT = 'stories_scraper 1.0 by /u/mrgoosee'
+from tqdm import tqdm
+from config import CLIENT_ID, CLIENT_SECRET, USER_AGENT
 
 # Authenticate with Reddit
 reddit = praw.Reddit(client_id=CLIENT_ID,
@@ -23,7 +20,7 @@ file_path = 'aita_top_posts_by_week.csv'
 def fetch_top_posts_for_week(start_date, end_date):
     top_posts = []
     subreddit = reddit.subreddit(subreddit_name)
-    for post in subreddit.top(time_filter='week', limit=1000):
+    for post in tqdm(subreddit.top(time_filter='week', limit=1000), f'fetching top posts between {start_date} and {end_date}'):
         post_time = dt.datetime.fromtimestamp(post.created_utc, dt.timezone.utc)
         if start_date <= post_time < end_date:
             top_posts.append((post.title, post.selftext.replace('\n', ' ').replace('\r', ' ')))

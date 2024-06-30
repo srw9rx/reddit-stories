@@ -1,10 +1,7 @@
 import praw
 import csv
-
-# Define your credentials
-CLIENT_ID = 'vstM2xdDcE-R5ZCJfRQiAw'
-CLIENT_SECRET = 'g7H871S_IAzRZpjBVQjYydbVSR1J4A'
-USER_AGENT = 'stories_scraper 1.0 by /u/mrgoosee'
+from tqdm import tqdm
+from config import CLIENT_ID, CLIENT_SECRET, USER_AGENT
 
 # Authenticate with Reddit
 reddit = praw.Reddit(client_id=CLIENT_ID,
@@ -23,7 +20,7 @@ with open('aita_top_posts.csv', mode='w', newline='', encoding='utf-8') as file:
     writer = csv.writer(file)
     writer.writerow(['Title', 'Text'])
 
-    for post in top_posts:
+    for post in tqdm(top_posts, 'scraping top posts:'):
         # Remove new lines from the text
         clean_text = post.selftext.replace('\n', ' ').replace('\r', ' ')
         writer.writerow([post.title, clean_text])
