@@ -157,11 +157,11 @@ dmypy.json
 # Cython debug symbols
 cython_debug/
 
-# config.py with api key
-config.py
+# Data Files
+*.csv
 
-# data files
-*csv
+# config w/ api key
+config.py
 
 # PyCharm
 #  JetBrains specific template is maintained in a separate JetBrains.gitignore that can
