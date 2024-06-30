@@ -16,7 +16,7 @@ This project is designed to generate AI-created stories and convert them into Yo
 To run this project, you will need:
 
 - Python 3.8 or higher
-- OpenAI API key (or similar service for text generation)
+- Reddit API Key (for scraping reddit posts)
 - YouTube API credentials (for uploading videos)
 
 ### Installation
@@ -47,8 +47,9 @@ To run this project, you will need:
 2. **Environment Variables**:
     - Create a `.env` file in the project root with the following content:
       ```plaintext
-      OPENAI_API_KEY=your_openai_api_key
-      YOUTUBE_API_KEY=your_youtube_api_key
+        REDDIT_CLIENT_ID= "" //PUT_YOUR_REDDIT_ID_HERE
+        REDDIT_CLIENT_SECRET="" //PUT_YOUR_REDDIT_SECRET_HERE
+        REDDIT_USER_AGENT = "" //NAME_YOUR_REDDIT_USER_AGENT
       ```
 
 ### Usage
