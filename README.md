@@ -37,6 +37,21 @@ To run this project, you will need:
     ```bash
     pip install -r requirements.txt
     ```
+    **If you are running on OSX**:
+     - if you are runnning on OSX and would like to allow for speedup of mp3, you will need to perform the following instructions to download ffprobe, which is a requirement for pydub, our python audio interpreter.
+    1. Download both ffmpeg and ffprobe from https://ffbinaries.com/downloads
+    2. Run the following in the command line:
+        ```zsh
+        sudo cp Downloads/ffmpeg /usr/local/bin/
+        sudo chmod 755 /usr/local/bin/ffmpeg
+        ffmpeg
+
+        sudo cp Downloads/ffprobe /usr/local/bin/
+        sudo chmod 755 /usr/local/bin/ffprobe
+        ffprobe
+        ```
+
+
 
 ### Configuration
 
