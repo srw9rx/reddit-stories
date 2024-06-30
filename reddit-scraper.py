@@ -1,36 +1,31 @@
 import praw
-import datetime as dt
+import csv
 
 # Define your credentials
-CLIENT_ID = 'your_client_id'
-CLIENT_SECRET = 'your_client_secret'
-USER_AGENT = 'your_user_agent'
+CLIENT_ID = 'vstM2xdDcE-R5ZCJfRQiAw'
+CLIENT_SECRET = 'g7H871S_IAzRZpjBVQjYydbVSR1J4A'
+USER_AGENT = 'stories_scraper 1.0 by /u/mrgoosee'
 
 # Authenticate with Reddit
 reddit = praw.Reddit(client_id=CLIENT_ID,
                      client_secret=CLIENT_SECRET,
                      user_agent=USER_AGENT)
 
-# Define the subreddit and the timeframe
+# Define the subreddit
 subreddit_name = 'AmItheAsshole'
-timeframe = '3_months'
 
-# Calculate the start time (3 months ago)
-current_time = dt.datetime.utcnow()
-start_time = current_time - dt.timedelta(days=90)
-
-# Fetch top stories from the past 3 months
+# Fetch top stories
 subreddit = reddit.subreddit(subreddit_name)
-top_posts = subreddit.top(time_filter='all', limit=1000)
+top_posts = subreddit.top(limit=1000)
 
-# Filter posts from the past 3 months
-filtered_posts = [post for post in top_posts if dt.datetime.utcfromtimestamp(post.created_utc) > start_time]
+# Save the posts to a CSV file
+with open('aita_top_posts.csv', mode='w', newline='', encoding='utf-8') as file:
+    writer = csv.writer(file)
+    writer.writerow(['Title', 'Text'])
 
-# Print the top stories
-for post in filtered_posts:
-    print(f"Title: {post.title}")
-    print(f"Score: {post.score}")
-    print(f"URL: {post.url}")
-    print(f"Date: {dt.datetime.utcfromtimestamp(post.created_utc)}")
-    print(f"Comments: {post.num_comments}")
-    print('---')
+    for post in top_posts:
+        # Remove new lines from the text
+        clean_text = post.selftext.replace('\n', ' ').replace('\r', ' ')
+        writer.writerow([post.title, clean_text])
+
+print("Posts have been saved to aita_top_posts.csv")
